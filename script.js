@@ -1,5 +1,11 @@
-// Podemos destrinchar o fluxo de execução de tarefas em JavaScript em três partes: Event Loop, Call Stack e Task Queue. O Event Loop é um ciclo que monitora e executa as ações que mandamos para o JavaScript. O processo de leitura do código só é finalizado quando não existem mais ações a serem executadas. A call stack é um mecanismo que organiza como irá funcionar o script quando existem muitas funções: qual função está sendo executada, quais estão sendo chamadas dentro de alguma função, etc. Por fim, a task queue é a fila de tarefas assíncronas. Se algo precisa ocorrer em segundo plano ou mais tarde, é nessa fila que ele será adicionado e executado mais tarde.
-
-var consultaCep = fetch('https://viacep.com.br/ws/01001000/json/'); //API viacep. Consumindo dados da API pelo metodo fetch.
+var consultaCep = fetch('https://viacep.com.br/ws/01001000/json/')
+.then(resposta => resposta.json())
+.then(r => {
+    if (r.erro) {
+        throw Error ("CEP IVÁLIDO!")
+    } else
+    console.log(r)
+})
+.catch(erro => console.log(erro)); 
 
 console.log(consultaCep);
